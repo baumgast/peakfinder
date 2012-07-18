@@ -5,12 +5,12 @@
 setwd("~/Dropbox/R/data")
 
 # paths & neck coords, select only one
-source('fast_imaging/yJC5919/yJC5919_paths.R')
-#source('fast_imaging/Kar9/Kar9_paths.R')
+#source('fast_imaging/yJC5919/yJC5919_paths.R')
+source('fast_imaging/Kar9/Kar9_paths.R')
 #source('fast_imaging/Num1/Num1_paths.R')
 
 #select hich cell, cell 2 for Kar9 is no working due to invisible neck.
-j = 2
+j = 4
 
 pixel = 0.077474
 
@@ -23,7 +23,7 @@ source('fast_imaging/SPBposDPG.R')
 #------------------------------------------------------------------------
 #detect pulling events
 
-deltaT = 0.5         #in minutes
+deltaT = 0.4         #in minutes
 frames = deltaT*60/necks[j,]$deltaT
 
 height = 0.5       #in micrometer
