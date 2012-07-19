@@ -16,10 +16,12 @@ source('fast_imaging/Kar9/Kar9_paths.R')
 j = 5
 #size of the slideing window in minutes
 deltaT = 0.4
-#height treshold of pulling events
-height = 0.5
 #maximal time between two found spikes to be considered to belong together
 dt = 15/60
+#height treshold of pulling events in microns
+height = 0.5
+#maximal duration of one event in minutes
+duration = 2
 
 #run the peakfinder script
 source('~/Desktop/peakfinder/peakFinder.R')

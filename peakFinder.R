@@ -262,7 +262,7 @@ maxs     = length(which(!is.na(distMax[1,])))
 NoCol    = length(timesMin)/dim(timesMin)[2]
 UpCand   = as.data.frame(matrix(NA, nr = 20, nc = 7))
 DownCand = as.data.frame(matrix(NA,nr = 20, nc = 7))
-colNames = c('start','end','duration','distMin','distMax','height','avgVelo')
+colNames = c('start','end','duration','startDist','endDist','height','avgVelo')
 colnames(UpCand)   = colNames
 colnames(DownCand) = colNames
 countUp   = 0
@@ -281,13 +281,13 @@ for (i in 1:maxs) {
       index = which(timesMin == lowerMax)
       col = ceiling(index/NoCol)
       
-      UpCand$start[countUp]    = timesMin[which(distMin[,col] == min(distMin[,col],na.rm = T)),col]
-      UpCand$end[countUp]      = time[which(dist == max(dist))]
-      UpCand$duration[countUp] = UpCand$end[countUp] - UpCand$start[countUp]
-      UpCand$distMin[countUp]  = distMin[which(distMin[,col] == min(distMin[,col],na.rm = T)),col]
-      UpCand$distMax[countUp]  = max(dist)
-      UpCand$height[countUp]   = max(dist) - distMin[which(distMin[,col] == min(distMin[,col],na.rm = T)),col]
-      UpCand$avgVelo[countUp]  = UpCand$height[countUp]/(UpCand$end[countUp] - UpCand$start[countUp])
+      UpCand$start[countUp]      = timesMin[which(distMin[,col] == min(distMin[,col],na.rm = T)),col]
+      UpCand$end[countUp]        = time[which(dist == max(dist))]
+      UpCand$duration[countUp]   = UpCand$end[countUp] - UpCand$start[countUp]
+      UpCand$startDist[countUp]  = distMin[which(distMin[,col] == min(distMin[,col],na.rm = T)),col]
+      UpCand$endDist[countUp]    = max(dist)
+      UpCand$height[countUp]     = max(dist) - distMin[which(distMin[,col] == min(distMin[,col],na.rm = T)),col]
+      UpCand$avgVelo[countUp]    = UpCand$height[countUp]/(UpCand$end[countUp] - UpCand$start[countUp])
       
       
       segments(time[which(dist == max(dist))],max(dist),
@@ -307,13 +307,13 @@ for (i in 1:maxs) {
       if(timesMin[which(distMin[,col] == min(distMin[,col],na.rm = T)),col] > max(time)) {
         countDown = countDown + 1
         
-        DownCand$start[countDown]    = timesMin[which(distMin[,col] == min(distMin[,col],na.rm = T)),col]
-        DownCand$end[countDown]      = time[which(dist == max(dist))]
-        DownCand$duration[countDown] = DownCand$end[countDown] - DownCand$start[countDown]
-        DownCand$distMin[countDown]  = distMin[which(distMin[,col] == min(distMin[,col],na.rm = T)),col]
-        DownCand$distMax[countDown]  = max(dist)
-        DownCand$height[countDown]   = DownCand$distMin[countDown] - DownCand$distMax[countDown]
-        DownCand$avgVelo[countDown]  = DownCand$height[countDown]/DownCand$duration[countDown]
+        DownCand$start[countDown]      = time[which(dist == max(dist))]
+        DownCand$end[countDown]        = timesMin[which(distMin[,col] == min(distMin[,col],na.rm = T)),col]
+        DownCand$duration[countDown]   = DownCand$end[countDown] - DownCand$start[countDown]
+        DownCand$startDist[countDown]  = distMin[which(distMin[,col] == min(distMin[,col],na.rm = T)),col]
+        DownCand$endDist[countDown]    = max(dist)
+        DownCand$height[countDown]     = DownCand$startDist[countDown] - DownCand$endDist[countDown]
+        DownCand$avgVelo[countDown]    = DownCand$height[countDown]/DownCand$duration[countDown]
           
         segments(time[which(dist == max(dist))], max(dist),
                  timesMin[which(distMin[,col] == min(distMin[,col],na.rm = T)),col],
