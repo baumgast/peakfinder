@@ -1,17 +1,22 @@
-#-------------------------------------------------------------------------
-#calculate distances of SPBs and aMTs
-
-#setwd("C:/Users/baumgast/Dropbox/R/data")
-setwd("~/Dropbox/R/data")
-
 # paths & neck coords, select only one
 #source('fast_imaging/yJC5919/yJC5919_paths.R')
 source('fast_imaging/Kar9/Kar9_paths.R')
 #source('fast_imaging/Num1/Num1_paths.R')
 
-#select hich cell, cell 2 for Kar9 is no working due to invisible neck.
-j = 4
+#parameters
+#select which cell, cell 2 for Kar9 is no working due to invisible neck.
+j = 3
+#size of the slideing window in minutes
+deltaT = 0.5
+#height treshold of pulling events
+height = 0.5
+#maximal time between two found spikes to be considered to belong together
+dt = 10/60
+#-------------------------------------------------------------------------
+#calculate distances of SPBs and aMTs
 
+#setwd("C:/Users/baumgast/Dropbox/R/data")
+setwd("~/Dropbox/R/data")
 pixel = 0.077474
 
 #read the jth datafile from the vector paths
@@ -22,11 +27,7 @@ t = (0:(length(a$xdSPB) - 1))*necks$deltaT[j]/60
 source('fast_imaging/SPBposDPG.R')
 #------------------------------------------------------------------------
 #detect pulling events
-
-deltaT = 0.4         #in minutes
 frames = deltaT*60/necks[j,]$deltaT
-
-height = 0.5       #in micrometer
 
 timeMax     = vector()
 peaks       = vector()
@@ -206,43 +207,13 @@ diffTroughs = diff(Troughs)
 diffTimeMax = diff(TimeMax)
 diffPeaks   = diff(Peaks)
 
-dt = 10/60
 count = 1
 col = 1
 
-timesMin = matrix(NA,nr = 100,nc = 40)
-distMin  = matrix(NA,nr = 100,nc = 40)
-timesMax = matrix(NA,nr = 100,nc = 40)
-distMax  = matrix(NA,nr = 100,nc = 40)
-
-# for (i in 2:(length(diffTroughs))) {
-#   if (sign(diffTroughs[i]) == sign(diffTroughs[i-1]) & diffTimeMin[i-1] < dt) {
-#     timesMin[count,col] = TimeMin[i-1]
-#     distMin[count,col]  = Troughs[i-1]
-#     count = count + 1
-#     #cat('count',count,'\n')
-#   }else{
-#     timesMin[count,col] = TimeMin[i-1]
-#     distMin[count,col]  = Troughs[i-1] 
-#     count = 1
-#     col = col + 1
-#   }
-# }
-# count = 1
-# col = 1
-# for (i in 2:(length(diffPeaks))) {
-#   if (sign(diffPeaks[i]) == sign(diffPeaks[i-1]) & diffTimeMax[i-1] < dt) {
-#     timesMax[count,col] = TimeMax[i-1]
-#     distMax[count,col]  = Peaks[i-1]
-#     count = count + 1
-#     #cat('count',count,'\n')
-#   }else{
-#     timesMax[count,col] = TimeMax[i-1]
-#     distMax[count,col]  = Peaks[i-1]
-#     count = 1
-#     col = col + 1
-#   }
-# }
+timesMin = matrix(NA,nr = 50,nc = 20)
+distMin  = matrix(NA,nr = 50,nc = 20)
+timesMax = matrix(NA,nr = 50,nc = 20)
+distMax  = matrix(NA,nr = 50,nc = 20)
 
 #sort peaks by their distance in time
 for (i in 2:length(Troughs)) {
@@ -308,7 +279,7 @@ for (i in 1:maxs) {
       
       segments(time[which(dist == max(dist))],max(dist),
                timesMin[which(distMin[,col] == min(distMin[,col],na.rm = T)),col],
-               distMin[which(distMin[,col] == min(distMin[,col],na.rm = T)),col], lwd = 2, col = 'darkgrey')
+               distMin[which(distMin[,col] == min(distMin[,col],na.rm = T)),col], lwd = 3, col = 'darkseagreen')
     }
   }
   upper = which(timesMin > max(time))
@@ -318,10 +289,11 @@ for (i in 1:maxs) {
     if (tMin < dt) {
       index = which(timesMin == upperMin)
       col = ceiling(index/NoCol)
-      
-      segments(time[which(dist == max(dist))], max(dist),
-               timesMin[which(distMin[,col] == min(distMin[,col],na.rm = T)),col],
-               distMin[which(distMin[,col] == min(distMin[,col],na.rm = T)),col], lwd = 2, col = 'darkblue')
+      if(timesMin[which(distMin[,col] == min(distMin[,col],na.rm = T)),col] > max(time)) {
+        segments(time[which(dist == max(dist))], max(dist),
+                 timesMin[which(distMin[,col] == min(distMin[,col],na.rm = T)),col],
+                 distMin[which(distMin[,col] == min(distMin[,col],na.rm = T)),col], lwd = 3, col = 'darkblue')
+      }
     }
   }
 }
