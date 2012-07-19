@@ -260,9 +260,9 @@ for (i in 2:length(Peaks)) {
 #determine beginnint and ending if peaks
 maxs     = length(which(!is.na(distMax[1,])))
 NoCol    = length(timesMin)/dim(timesMin)[2]
-UpCand   = as.data.frame(matrix(NA, nr = 20, nc = 7))
-DownCand = as.data.frame(matrix(NA,nr = 20, nc = 7))
-colNames = c('start','end','duration','startDist','endDist','height','avgVelo')
+colNames = c('start','end','duration','startDist','endDist','height','avgVelo','corrCoeff1','corrCoeff2','aMTlength1','aMTlength2')
+UpCand   = as.data.frame(matrix(NA,nr = 20, nc = length(colNames)))
+DownCand = as.data.frame(matrix(NA,nr = 20, nc = length(colNames)))
 colnames(UpCand)   = colNames
 colnames(DownCand) = colNames
 countUp   = 0

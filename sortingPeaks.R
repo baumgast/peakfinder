@@ -27,11 +27,26 @@ UpaMT1 = matrix(NA,nr = nrMax+1, nc = length(Up$duration))
 UpaMT2 = matrix(NA,nr = nrMax+1, nc = length(Up$duration))
 UpdSPB = matrix(NA,nr = nrMax+1, nc = length(Up$duration))
 
+
 for (i in 1:nrUp) {
   index = which(t >= Up$start[i] & t <= Up$end[i])
   UpaMT1[1:length(index),i] = distDaMT1[index]
   UpaMT2[1:length(index),i] = distDaMT2[index]
   UpdSPB[1:length(index),i] = distD[index]
+  #pearson correlation coefficient
+  if (length(which(!is.na(distDaMT1[index]))) > 0) {
+    corr1 = cor(distD[index],distDaMT1[index], use = 'complete.obs')
+    Up$corrCoeff1[i] = corr1
+  }
+  if (length(which(!is.na(distDaMT2[index]))) > 0) {
+    corr2 = cor(distD[index],distDaMT2[index], use = 'complete.obs')
+    Up$corrCoeff2[i] = corr2
+  }
+  #mean aMT length
+  L1 = sqrt((a$xdSPB[index] - a$xdaMT1[index])^2 + (a$ydSPB[index] - a$ydaMT1[index])^2)*pixel
+  L2 = sqrt((a$xdSPB[index] - a$xdaMT2[index])^2 + (a$ydSPB[index] - a$ydaMT2[index])^2)*pixel
+  Up$aMTlength1[i] = mean(L1,na.rm = T)
+  Up$aMTlength2[i] = mean(L2,na.rm = T)
 }
 #down events
 nrMax =  max(Down$duration)/(t[2] - t[1]) + 1
@@ -44,4 +59,24 @@ for (i in 1:nrDown) {
   DownaMT1[1:length(index),i] = distDaMT1[index]
   DownaMT2[1:length(index),i] = distDaMT2[index]
   DowndSPB[1:length(index),i] = distD[index]
+  #pearson correlation coefficient
+  if (length(which(!is.na(distDaMT1[index]))) > 0) {
+    corr1 = cor(distD[index],distDaMT1[index], use = 'complete.obs')
+    Down$corrCoeff1[i] = corr1
+  }
+  if (length(which(!is.na(distDaMT2[index]))) > 0) {
+    corr2 = cor(distD[index],distDaMT2[index], use = 'complete.obs')
+    Down$corrCoeff2[i] = corr2
+  }
+  #mean aMT length
+  L1 = sqrt((a$xdSPB[index] - a$xdaMT1[index])^2 + (a$ydSPB[index] - a$ydaMT1[index])^2)*pixel
+  L2 = sqrt((a$xdSPB[index] - a$xdaMT2[index])^2 + (a$ydSPB[index] - a$ydaMT2[index])^2)*pixel
+  Down$aMTlength1[i] = mean(L1,na.rm = T)
+  Down$aMTlength2[i] = mean(L2,na.rm = T)
+}
+
+#calculate correlation coefficients between dSPB and distDaMT1&2
+#up events
+for (i in 1:dim(UpaMT1)[2]) {
+  #corr1 = cor() 
 }
