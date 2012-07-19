@@ -7,17 +7,17 @@
 setwd("~/Dropbox/R/data")
 
 # paths & neck coords, select only one
-#source('fast_imaging/yJC5919/yJC5919_paths.R')
-source('fast_imaging/Kar9/Kar9_paths.R')
+source('fast_imaging/yJC5919/yJC5919_paths.R')
+#source('fast_imaging/Kar9/Kar9_paths.R')
 #source('fast_imaging/Num1/Num1_paths.R')
 
 #parameters
 #select which cell, cell 2 for Kar9 is no working due to invisible neck.
-j = 5
+j = 2
 #size of the slideing window in minutes
 deltaT = 0.4
 #maximal time between two found spikes to be considered to belong together
-dt = 15/60
+dt = 10/60
 #height treshold of pulling events in microns
 height = 0.5
 #maximal duration of one event in minutes
@@ -25,3 +25,10 @@ duration = 2
 
 #run the peakfinder script
 source('~/Desktop/peakfinder/peakFinder.R')
+#run the sorting script
+source('~/Desktop/peakfinder/sortingPeaks.R')
+cat('Up \n')
+print(Up)
+
+cat('Down \n')
+print(Down)

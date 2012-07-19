@@ -12,7 +12,7 @@ rowsDown = which(abs(DownCand$height) >=height & DownCand$duration <= duration)
 nrUp = length(rowsUp)
 nrDown = length(rowsDown)
 
-Up = as.data.frame(matrix(NA, nr = nrUp, nc = length(colNames)))
+Up   = as.data.frame(matrix(NA, nr = nrUp, nc = length(colNames)))
 colnames(Up) = colNames
 Down = as.data.frame(matrix(NA, nr = nrDown, nc = length(colNames)))
 colnames(Down) = colNames
@@ -22,11 +22,10 @@ Down = DownCand[rowsDown,]
 
 #find the corresponding daMT distance data points
 #up events
-nrMax =  max(Up$duration)/(t[2] - t[1]) + 1
+nrMax  =  max(Up$duration)/(t[2] - t[1]) + 1
 UpaMT1 = matrix(NA,nr = nrMax+1, nc = length(Up$duration))
 UpaMT2 = matrix(NA,nr = nrMax+1, nc = length(Up$duration))
 UpdSPB = matrix(NA,nr = nrMax+1, nc = length(Up$duration))
-
 
 for (i in 1:nrUp) {
   index = which(t >= Up$start[i] & t <= Up$end[i])
