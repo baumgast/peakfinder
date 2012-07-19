@@ -1,3 +1,11 @@
+#master file for the peakfinder. hands all necessary parameters to the actual script and runs it.
+#
+#-----------------------------------------------------------------------------------------------
+#working directory windows
+#setwd("C:/Users/baumgast/Dropbox/R/data")
+#working directory mac
+setwd("~/Dropbox/R/data")
+
 # paths & neck coords, select only one
 #source('fast_imaging/yJC5919/yJC5919_paths.R')
 source('fast_imaging/Kar9/Kar9_paths.R')
@@ -13,7 +21,5 @@ height = 0.5
 #maximal time between two found spikes to be considered to belong together
 dt = 15/60
 
-#working directory windows
-#setwd("C:/Users/baumgast/Dropbox/R/data")
-#working directory mac
-setwd("~/Dropbox/R/data")
+#run the peakfinder script
+source('~/Desktop/peakfinder/peakFinder.R')
