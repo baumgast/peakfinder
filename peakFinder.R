@@ -1,8 +1,8 @@
 #script to detect pulling and backwards moving events in the daughter spindle pole path over time.
 #within a sliding window the maximum and minimum values are detected. depending on their timedifferences this
-#spikes are grouped and the maxima are connected with their neares minima. Such a connection represents
+#spikes are grouped and the maxima are connected with their nearest minima. Such a connection represents
 #a candidate event and are reported in a dataframe.
-#basic parameters are giving in the master file from which this script is ran.
+#basic parameters are giving in the master file from which this script is run.
 #
 #Input: path to the cell of interest
 #       parameters: window size, maximal spike distance
@@ -193,8 +193,7 @@ if (length(timeMaxaMT2)>0) {
   #points(TimeMaxaMT2, PeaksaMT2, pch = 20, col = 'orangered')
   #points(TimeMinaMT2, TroughsaMT2, pch = 20, col = 'purple')
 }
-legend(x = 8, y = 1, c('dSPB','daMT1','daMT2','down spikes','up spikes', 'pulling events','backward motion'),lwd = c(1,1,1,0,0,3,3), 
-       pch = c(NA,NA,NA,15,17,NA,NA), col = c('black','grey','peru','cyan','magenta','darkseagreen','darkblue'), bty = 'n')
+
 #-----------------------------------------------------------------------
 #count consectuive steps in hight change in the same direction
 diffTimeMin = diff(TimeMin)
@@ -257,12 +256,12 @@ for (i in 2:length(Peaks)) {
   }
 }
 #--------------------------------------------------------------------------
-#determine beginnint and ending if peaks
+#determine beginning and ending of peaks
 maxs     = length(which(!is.na(distMax[1,])))
 NoCol    = length(timesMin)/dim(timesMin)[2]
 colNames = c('start','end','duration','startDist','endDist','height','avgVelo','corrCoeff1','corrCoeff2','aMTlength1','aMTlength2')
-UpCand   = as.data.frame(matrix(NA,nr = 20, nc = length(colNames)))
-DownCand = as.data.frame(matrix(NA,nr = 20, nc = length(colNames)))
+UpCand   = as.data.frame(matrix(NA,nr = 30, nc = length(colNames)))
+DownCand = as.data.frame(matrix(NA,nr = 30, nc = length(colNames)))
 colnames(UpCand)   = colNames
 colnames(DownCand) = colNames
 countUp   = 0
@@ -290,9 +289,9 @@ for (i in 1:maxs) {
       UpCand$avgVelo[countUp]    = UpCand$height[countUp]/(UpCand$end[countUp] - UpCand$start[countUp])
       
       
-      segments(time[which(dist == max(dist))],max(dist),
-               timesMin[which(distMin[,col] == min(distMin[,col],na.rm = T)),col],
-               distMin[which(distMin[,col]  == min(distMin[,col],na.rm = T)),col], lwd = 3, col = 'darkseagreen')
+#       segments(time[which(dist == max(dist))],max(dist),
+#                timesMin[which(distMin[,col] == min(distMin[,col],na.rm = T)),col],
+#                distMin[which(distMin[,col]  == min(distMin[,col],na.rm = T)),col], lwd = 3, col = 'darkseagreen')
     }
   }
   #backward movement
@@ -315,9 +314,9 @@ for (i in 1:maxs) {
         DownCand$height[countDown]     = DownCand$startDist[countDown] - DownCand$endDist[countDown]
         DownCand$avgVelo[countDown]    = DownCand$height[countDown]/DownCand$duration[countDown]
           
-        segments(time[which(dist == max(dist))], max(dist),
-                 timesMin[which(distMin[,col] == min(distMin[,col],na.rm = T)),col],
-                 distMin[which(distMin[,col]  == min(distMin[,col],na.rm = T)),col], lwd = 3, col = 'darkblue')
+#         segments(time[which(dist == max(dist))], max(dist),
+#                  timesMin[which(distMin[,col] == min(distMin[,col],na.rm = T)),col],
+#                  distMin[which(distMin[,col]  == min(distMin[,col],na.rm = T)),col], lwd = 3, col = 'darkblue')
       }
     }
   }
