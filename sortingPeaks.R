@@ -53,11 +53,23 @@ if(nrUp > 0) {
       }
     }
   }
+  UpMean = as.data.frame(matrix(NA, nr = 1, nc = 9))
+  colnames(UpMean) = c('n','n.t','obsT','meanVelo','sdVelo','meanDist','sdDist','meanDur','sdDur')
   
+  UpMean$n        = length(which(!is.na(Up[,1])))
+  UpMean$n.t      = UpMean$n/max(t)
+  UpMean$obsT     = max(t)
+  UpMean$meanVelo = mean(Up$avgVelo, na.rm = T)
+  UpMean$sdVelo   = sd(Up$avgVelo, na.rm = T)
+  UpMean$meanDist = mean(Up$height, na.rm = T)
+  UpMean$sdDist   = sd(Up$height, na.rm = T)
+  UpMean$meanDur  = mean(Up$duration, na.rm = T)
+  UpMean$sdDur    = sd(Up$duration, na.rm = T)
   #display results
   cat('Up \n')
   print(Up)
-  segments(Up$start,Up$startDist,Up$end,Up$endDist, col = 'springgreen4', lwd = 3)
+  cat('UpMean \n')
+  print(UpMean)
 }else{print('no pulling events')
       Up   = as.data.frame(matrix(NA, nr = 1, nc = length(colNames)))
       colnames(Up) = colNames
@@ -103,12 +115,23 @@ if (nrDown > 0) {
       }
     }
   }
+  DownMean = as.data.frame(matrix(NA, nr = 1, nc = 9))
+  colnames(DownMean) = c('n','n.t','obsT','meanVelo','sdVelo','meanDist','sdDist','meanDur','sdDur')
+  
+  DownMean$n        = length(which(!is.na(Down[,1])))
+  DownMean$n.t      = DownMean$n/max(t)
+  DownMean$obsT     = max(t)
+  DownMean$meanVelo = mean(Down$avgVelo, na.rm = T)
+  DownMean$sdVelo   = sd(Down$avgVelo, na.rm = T)
+  DownMean$meanDist = mean(Down$height, na.rm = T)
+  DownMean$sdDist   = sd(Down$height, na.rm = T)
+  DownMean$meanDur  = mean(Down$duration, na.rm = T)
+  DownMean$sdDur    = sd(Down$duration, na.rm = T)
   cat('Down \n')
   print(Down)
-  segments(Down$start,Down$endDist,Down$end,Down$startDist, col = 'darkblue', lwd = 3)
+  cat('DownMean \n')
+  print(DownMean)
 }else{print('no back movements')
       Down = as.data.frame(matrix(NA, nr = 1, nc = length(colNames)))
       colnames(Down) = colNames
       }
-legend(x = 7, y = 1, c('dSPB','daMT1','daMT2','down spikes','up spikes', 'forward events','backward events'),lwd = c(2,2,2,0,0,3,3), 
-       pch = c(NA,NA,NA,15,17,NA,NA), col = c('black','grey','peru','cyan','magenta','darkseagreen','darkblue'), bty = 'n')
