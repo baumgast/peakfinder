@@ -13,7 +13,7 @@ box()
 title(main = as.character(necks$cellName[j]),
       xlab = 'Time (min)',
       ylab = 'Distance (mu)')
-points(t,distD, type = 'l')
+points(t,distD, type = 'l', lwd = 1.5)
 points(t,distDaMT1, type = 'l', col = 'grey')
 points(t,distDaMT2, type = 'l', col = 'peru')
 #points(timeMax,peaks, pch = 19, col = 'red')
@@ -27,8 +27,8 @@ if (length(timeMaxaMT2)>0) {
   #points(TimeMinaMT2, TroughsaMT2, pch = 20, col = 'purple')
 }
 
-segments(Down$start,Down$endDist,Down$end,Down$startDist, col = 'darkblue', lwd = 3)
-segments(Up$start,Up$startDist,Up$end,Up$endDist, col = 'springgreen4', lwd = 3)
+segments(Down$start,Down$endDist,Down$end,Down$startDist, col = 'darkblue', lwd = 4)
+segments(Up$start,Up$startDist,Up$end,Up$endDist, col = 'springgreen4', lwd = 4)
 
-legend(x = 7, y = 1, c('dSPB','daMT1','daMT2','down spikes','up spikes', 'forward events','backward events'),lwd = c(2,2,2,0,0,3,3), 
-       pch = c(NA,NA,NA,15,17,NA,NA), col = c('black','grey','peru','cyan','magenta','darkseagreen','darkblue'), bty = 'n')
+#legend(x = 7, y = 1, c('dSPB','daMT1','daMT2','down spikes','up spikes', 'forward events','backward events'),lwd = c(2,2,2,0,0,3,3), 
+#       pch = c(NA,NA,NA,15,17,NA,NA), col = c('black','grey','peru','cyan','magenta','darkseagreen','darkblue'), bty = 'n')

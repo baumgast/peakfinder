@@ -7,8 +7,8 @@
 #       paramters for event selection
 #---------------------------------------------------------------------------
 #sort out the events that are interesting based on the minimal height and maximal duration given in the master file
-rowsUp = which(UpCand$height >= height & UpCand$duration <= duration & UpCand$duration > 0)
-rowsDown = which(abs(DownCand$height) >=height & DownCand$duration <= duration & DownCand$duration > 0)
+rowsUp = which(UpCand$height >= height & UpCand$duration <= duration & UpCand$duration > 0 & UpCand$avgVelo < avg)
+rowsDown = which(abs(DownCand$height) >=height & DownCand$duration <= duration & DownCand$duration > 0 & DownCand$avgVelo < avg)
 nrUp = length(rowsUp)
 nrDown = length(rowsDown)
 
