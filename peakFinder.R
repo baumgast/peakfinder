@@ -230,7 +230,8 @@ for (i in 2:length(Peaks)) {
 #determine beginning and ending of peaks
 maxs     = length(which(!is.na(distMax[1,])))
 NoCol    = length(timesMin)/dim(timesMin)[2]
-colNames = c('start','end','duration','startDist','endDist','height','avgVelo','corrCoeff1','corrCoeff2','aMTlength1','aMTlength2')
+colNames = c('start','end','duration','startDist','endDist','height','avgVelo','corrCoeff1','corrCoeff2',
+             'aMTlength1','aMTlength2','distaMT1start','distaMT1end','distaMT2start','distaMT2end')
 UpCand   = as.data.frame(matrix(NA,nr = 30, nc = length(colNames)))
 DownCand = as.data.frame(matrix(NA,nr = 30, nc = length(colNames)))
 colnames(UpCand)   = colNames
@@ -258,7 +259,14 @@ for (i in 1:maxs) {
       UpCand$endDist[countUp]    = max(dist)
       UpCand$height[countUp]     = max(dist) - distMin[which(distMin[,col] == min(distMin[,col],na.rm = T)),col]
       UpCand$avgVelo[countUp]    = UpCand$height[countUp]/(UpCand$end[countUp] - UpCand$start[countUp])
-      
+      indexaMTstart = which(t==UpCand$start[countUp])
+      indexaMTend   = which(t==UpCand$end[countUp])
+      UpCand$distaMT1start[countUp] = distDaMT1[indexaMTstart]
+      UpCand$distaMT1end[countUp]   = distDaMT1[indexaMTend]  
+      indexaMTstart = which(t == UpCand$start[countUp])
+      indexaMTend   = which(t == UpCand$end[countUp])
+      UpCand$distaMT2start[countUp] = distDaMT2[indexaMTstart]
+      UpCand$distaMT2end[countUp]   = distDaMT2[indexaMTend]
       
 #       segments(time[which(dist == max(dist))],max(dist),
 #                timesMin[which(distMin[,col] == min(distMin[,col],na.rm = T)),col],
@@ -284,6 +292,14 @@ for (i in 1:maxs) {
         DownCand$endDist[countDown]    = max(dist)
         DownCand$height[countDown]     = DownCand$startDist[countDown] - DownCand$endDist[countDown]
         DownCand$avgVelo[countDown]    = DownCand$height[countDown]/DownCand$duration[countDown]
+        indexaMTstart = which(t==DownCand$start[countDown])
+        indexaMTend   = which(t==DownCand$end[countDown])
+        DownCand$distaMT1start[countDown] = distDaMT1[indexaMTstart]
+        DownCand$distaMT1end[countDown]   = distDaMT1[indexaMTend]  
+        indexaMTstart = which(t == DownCand$start[countDown])
+        indexaMTend   = which(t == DownCand$end[countDown])
+        DownCand$distaMT2start[countDown] = distDaMT2[indexaMTstart]
+        DownCand$distaMT2end[countDown]   = distDaMT2[indexaMTend]
           
 #         segments(time[which(dist == max(dist))], max(dist),
 #                  timesMin[which(distMin[,col] == min(distMin[,col],na.rm = T)),col],

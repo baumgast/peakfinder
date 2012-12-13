@@ -11,6 +11,10 @@ corrCoeff1 = vector()
 corrCoeff2 = vector()
 aMTlength1 = vector()
 aMTlength2 = vector()
+distaMT1start = vector()
+distaMT1end   = vector()
+distaMT2start = vector()
+distaMT2end   = vector()
 
 TIME       = vector()
 
@@ -32,10 +36,16 @@ for (j in INDEX) {
   corrCoeff2 = c(corrCoeff2,Up$corrCoeff2)
   aMTlength1 = c(aMTlength1,Up$aMTlength1)
   aMTlength2 = c(aMTlength2,Up$aMTlength2)
+  distaMT1start = c(distaMT1start,Up$distaMT1start)
+  distaMT1end   = c(distaMT1end,Up$distaMT1end)
+  distaMT2start = c(distaMT2start,Up$distaMT2start)
+  distaMT2end   = c(distaMT2end,Up$distaMT2end)
+  
 }
 
 obsTime = vector(length = length(start))+sum(TIME)
-UpAll = data.frame(obsTime,start,end,Duration,startDist,endDist,Height,avgVelo,corrCoeff1,corrCoeff2,aMTlength1,aMTlength2)
+UpAll = data.frame(obsTime,start,end,Duration,startDist,endDist,Height,avgVelo,corrCoeff1,corrCoeff2,
+                   aMTlength1,aMTlength2,distaMT1start,distaMT1end,distaMT2start,distaMT2end)
 
 #------------------------------------------------------------------------------
 #down events
@@ -50,6 +60,10 @@ corrCoeff1 = vector()
 corrCoeff2 = vector()
 aMTlength1 = vector()
 aMTlength2 = vector()
+distaMT1start = vector()
+distaMT1end   = vector()
+distaMT2start = vector()
+distaMT2end   = vector()
 
 TIME       = vector()
 #iterate over all cells
@@ -69,7 +83,12 @@ for (j in INDEX) {
   corrCoeff2 = c(corrCoeff2,Down$corrCoeff2)
   aMTlength1 = c(aMTlength1,Down$aMTlength1)
   aMTlength2 = c(aMTlength2,Down$aMTlength2)
+  distaMT1start = c(distaMT1start,Down$distaMT1start)
+  distaMT1end   = c(distaMT1end,Down$distaMT1end)
+  distaMT2start = c(distaMT2start,Down$distaMT2start)
+  distaMT2end   = c(distaMT2end,Down$distaMT2end)
 }
 
 obsTime = vector(length = length(start))+sum(TIME)
-DownAll = data.frame(obsTime,start,end,Duration,startDist,endDist,Height,avgVelo,corrCoeff1,corrCoeff2,aMTlength1,aMTlength2)
+DownAll = data.frame(obsTime,start,end,Duration,startDist,endDist,Height,avgVelo,corrCoeff1,corrCoeff2,
+                     aMTlength1,aMTlength2,distaMT1start,distaMT1end,distaMT2start,distaMT2end)
