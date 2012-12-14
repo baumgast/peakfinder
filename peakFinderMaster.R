@@ -7,13 +7,13 @@
 setwd("~/Dropbox/R/data")
 
 # paths & neck coords, select only one
-source('fast_imaging/yJC5919/yJC5919_paths.R')
-#source('fast_imaging/Kar9/Kar9_paths.R')
+#source('fast_imaging/yJC5919/yJC5919_paths.R')
+source('fast_imaging/Kar9/Kar9_paths.R')
 #source('fast_imaging/Num1/Num1_paths.R')
 
 #parameters
 #select which cell, cell 2 for Kar9 is no working due to invisible neck.
-j = 2
+j = 7
 #size of the sliding window in minutes
 deltaT = 0.3
 #maximal time (min) between two found spikes to be considered to belong together
