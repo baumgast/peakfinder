@@ -1,4 +1,4 @@
-#master file for the peakfinder. hands all necessary parameters to the actual script and runs it.
+ #master file for the peakfinder. hands all necessary parameters to the actual script and runs it.
 #for single cells
 #-----------------------------------------------------------------------------------------------
 #working directory windows
@@ -8,8 +8,8 @@ setwd("~/Dropbox/R/data")
 
 # paths & neck coords, select only one
 #source('fast_imaging/yJC5919/yJC5919_paths.R')
-source('fast_imaging/Kar9/Kar9_paths.R')
-#source('fast_imaging/Num1/Num1_paths.R')
+#source('fast_imaging/Kar9/Kar9_paths.R')
+source('fast_imaging/Num1/Num1_paths.R')
 
 #parameters
 #select which cell, cell 2 for Kar9 is no working due to invisible neck.

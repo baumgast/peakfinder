@@ -1,5 +1,5 @@
 #plotting script for peakfinder
-pdf('~/Dropbox/spindle manuscript LibreOffice/firgures submission/raw plots:images/figure 4/pullingKar9.pdf', height = 4.5, width = 10)
+#pdf('~/Dropbox/spindle manuscript LibreOffice/firgures submission/raw plots:images/figure 4/pullingKar9.pdf', height = 4.5, width = 10)
 par(mfrow = c(1,1), mai = c(1.3,1.3,1,1), cex = 1.0, las = 1, xaxs = 'i', yaxs = 'i')
 
 xlim = range(t)
@@ -9,7 +9,7 @@ plot.new()
 plot.window(xlim,ylim)
 axis(1)
 axis(2)
-#grid()
+#grid() 
 box()
 title(#main = as.character(necks$cellName[j]),
       main = 'Kar9',
@@ -37,4 +37,4 @@ segments(Up$start,Up$startDist,Up$end,Up$endDist, col = 'springgreen4', lwd = 4)
 
 legend('topleft',c('spindle pole','aMT tip','forward event','backward event'), lwd = c(2,2,3,3), 
        col = c('black','grey','darkseagreen','darkblue'), bty = 'n')
-dev.off()
+#dev.off()
