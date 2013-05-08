@@ -15,6 +15,8 @@ dt = 10/60
 height = 0.45
 #maximal duration of one event in minutes
 duration = 4
+#maximal average velocity during the event in µm/min
+avg = 3
 
 # paths & neck coords wild type
 source('fast_imaging/yJC5919/yJC5919_paths.R')
@@ -22,6 +24,7 @@ source('fast_imaging/yJC5919/yJC5919_paths.R')
 source('~/Desktop/peakfinder/peakFinderLoopFunction.R')
 UpAll -> UpAllyJC5919
 DownAll -> DownAllyJC5919
+
 
 #kar9 mutant
 source('fast_imaging/Kar9/Kar9_paths.R')

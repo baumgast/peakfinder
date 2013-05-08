@@ -12,13 +12,13 @@ source('slow_imaging/yJC5919/yJC5919_paths.R')
 
 #parameters
 #select which cell, cell 2 for Kar9 is no working due to invisible neck.
-j = 8
+j = 6
 #size of the sliding window in minutes
-deltaT = 2
+deltaT = 0.5
 #maximal time (min) between two found spikes to be considered to belong together
 dt = 0.5
 #height treshold of pulling events in microns
-height = 0.4
+height = 0.5
 #maximal duration of one event in minutes
 duration = 5
 #maximal average velocity during the event in µm/min
